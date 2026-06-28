@@ -316,9 +316,7 @@ export default definePlugin({
         },
         // Allow users to use custom client themes
         {
-            find: "customUserThemeSettings:{",
-            // Discord has two separate modules for treatments 1 and 2
-            all: true,
+            find: '("custom_themes_editor_footer")',
             replacement: {
                 match: /(?<=\i=)\(0,\i\.\i\)\(\i\.\i\.TIER_2\)(?=,|;)/g,
                 replace: "true"
@@ -394,8 +392,8 @@ export default definePlugin({
             predicate: () => settings.store.transformEmojis,
             replacement: {
                 // Add the fake nitro emoji notice
-                match: /(?<=emojiDescription:)(\i)(?<=\1=\(\i=>\{.+?\}\)\((\i)\)[,;].+?)/,
-                replace: (_, reactNode, props) => `$self.addFakeNotice(${FakeNoticeType.Emoji},${reactNode},!!${props}?.fakeNitroNode?.fake)`
+                match: /(?<=emojiDescription:)(\i)(?<=\1=function\(\i\)\{let\{sourceType:.+?)/,
+                replace: (_, reactNode) => `$self.addFakeNotice(${FakeNoticeType.Emoji},${reactNode},!!arguments[0]?.fakeNitroNode?.fake)`
             }
         },
         // Separate patch for allowing using custom app icons
