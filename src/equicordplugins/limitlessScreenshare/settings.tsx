@@ -12,7 +12,7 @@ import { SettingsPresetList } from "./SettingsPresetList";
 // 0 FPS freezes (obviously) and anything less than 3p doesn't work
 export const COOLDOWN_MS = 1000;
 export const MIN_FPS = 1;
-export const MIN_RESOLUTION = 3;
+export const MIN_RESOLUTION = 10;
 
 export const settings = definePluginSettings({
     maxFPS: {
